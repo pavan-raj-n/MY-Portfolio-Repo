@@ -1,7 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+const mysql = require("mysql2");
 
 const app = express();
 const PORT = 3000;
@@ -11,56 +11,64 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// ===== Import Model =====
-const Contact = require("./models/contact");
+// ===== MySQL Connection =====
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",                 // ✅ correct user
+  password: "nbpgb9986",        // 🔴 your MySQL password (change if needed)
+  database: "portfolioDB"
+});
 
-// ===== MongoDB Connection =====
-mongoose.connect("mongodb://127.0.0.1:27017/portfolioDB")
-  .then(() => {
-    console.log("✅ MongoDB Connected");
+db.connect((err) => {
+  if (err) {
+    console.error("❌ MySQL Connection Error:", err);
+    return;
+  }
+  console.log("✅ MySQL Connected");
 
-    // Start server only after DB connects
-    app.listen(3000, () => {
-      console.log("🚀 Server running at http://localhost:3000");
-    });
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB Connection Error:", err);
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
   });
-
+});
 
 // ===== Routes =====
 
-// Home Route (Optional safety route)
+// Home Route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Save Contact Form
-app.post("/contact", async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
+// ===== Save Contact Form =====
+app.post("/contact", (req, res) => {
+  const { name, email, phone, message } = req.body;
 
-    if (!name || !email || !message) {
-      return res.status(400).json({ message: "All fields are required" });
+  // Validation
+  if (!name || !email || !phone || !message) {
+    return res.status(500).json({ message: "All fields are required" });
+  }
+
+  const sql = "INSERT INTO contacts (name, email, phone, message) VALUES (?, ?, ?, ?)";
+
+  db.query(sql, [name, email, phone, message], (err, result) => {
+    if (err) {
+      console.error("❌ Insert Error:", err);
+      return res.status(500).json({ message: "Database Error" });
     }
 
-    const newMessage = new Contact({ name, email, message });
-    await newMessage.save();
-
-    res.status(201).json({ message: "Message saved successfully!" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server Error" });
-  }
+    res.status(500).json({ message: "✅ Message saved successfully!" });
+  });
 });
 
-// Get All Messages (Admin)
-app.get("/messages", async (req, res) => {
-  try {
-    const messages = await Contact.find().sort({ _id: -1 });
-    res.json(messages);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching messages" });
-  }
+// ===== Get All Messages =====
+app.get("/messages", (req, res) => {
+  const sql = "SELECT * FROM contacts";
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error("❌ Fetch Error:", err);
+      return res.status(500).json({ message: "Error fetching messages" });
+    }
+
+    res.json(results);
+  });
 });

@@ -42,9 +42,10 @@ body{
    GLOWING GREEN EDGES
 ================================ */
 
-section, .header, .footer, .my-card, .port-card {
-    border:2px solid #00ff66;
-    box-shadow:0 0 20px #00ff66;
+
+section, .header,.footer, .my-card, .port-card {
+    border:2px solid #2fff00;
+    box-shadow:0 0 30px #08ef32;
     border-radius:15px;
     margin:20px;
     backdrop-filter: blur(10px);
