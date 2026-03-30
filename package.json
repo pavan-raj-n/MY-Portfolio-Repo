@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-website",
+  "name": "my-portfolio-repo",
   "version": "1.0.0",
   "description": "My portfolio website project",
   "main": "index.js",
@@ -19,12 +19,12 @@
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pavan-raj-n/portfolio-website.git"
+    "url": "git+https://github.com/pavan-raj-n/MY-Portfolio-Repo.git"
   },
   "bugs": {
-    "url": "https://github.com/pavan-raj-n/portfolio-website/issues"
+    "url": "https://github.com/pavan-raj-n/MY-Portfolio-Repo/issues"
   },
-  "homepage": "https://github.com/pavan-raj-n/portfolio-website#readme",
+  "homepage": "https://github.com/pavan-raj-n/MY-Portfolio-Repo#readme",
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1",

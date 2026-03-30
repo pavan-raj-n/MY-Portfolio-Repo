@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // ===== MySQL Connection =====
 const db = mysql.createConnection({
   host: "localhost",
-  user: "root",                 // ✅ correct user
+  user: "portfolioDB",                 // ✅ correct user
   password: "nbpgb9986",        // 🔴 your MySQL password (change if needed)
   database: "portfolioDB"
 });
