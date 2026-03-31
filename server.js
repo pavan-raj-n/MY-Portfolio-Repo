@@ -4,7 +4,7 @@ const path = require("path");
 const mysql = require("mysql2");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // ===== Middleware =====
 app.use(cors());
@@ -71,4 +71,11 @@ app.get("/messages", (req, res) => {
 
     res.json(results);
   });
+});
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+app.use(express.static(path.join(__dirname, "public")));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
