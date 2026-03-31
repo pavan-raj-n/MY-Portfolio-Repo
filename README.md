@@ -28,3 +28,19 @@ The project allows users to enter their details through a form, and the data is 
 ---
 
 ## 📂 Project Structure
+
+---
+
+## 📸 Output
+- Form submission stores data in MySQL
+- Data can be viewed in MySQL Workbench
+
+---
+
+## 👨‍💻 Author
+Pavan Raj N
+
+---
+
+## 📌 Conclusion
+This project demonstrates a complete full-stack development workflow including frontend, backend, database, and GitHub integration.
