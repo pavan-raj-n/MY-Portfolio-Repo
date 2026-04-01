@@ -11,57 +11,53 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// ===== MySQL Connection =====
+// ===== MySQL Connection (ONLY THIS ONE) =====
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "portfolioDB",                 // ✅ correct user
-  password: "nbpgb9986",        // 🔴 your MySQL password (change if needed)
-  database: "portfolioDB"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
 });
 
 db.connect((err) => {
   if (err) {
-    console.error("❌ MySQL Connection Error:", err);
-    return;
+    console.error("❌ DB ERROR:", err);
+  } else {
+    console.log("✅ DATABASE CONNECTED SUCCESSFULLY");
   }
-  console.log("✅ MySQL Connected");
-
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-  });
 });
 
 // ===== Routes =====
 
-// Home Route
+// Home
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// ===== Save Contact Form =====
+// Save Contact
 app.post("/contact", (req, res) => {
   const { name, email, phone, message } = req.body;
 
-  // Validation
   if (!name || !email || !phone || !message) {
-    return res.status(500).json({ message: "All fields are required" });
+    return res.status(400).json({ message: "All fields are required" });
   }
 
   const sql = "INSERT INTO contacts (name, email, phone, message) VALUES (?, ?, ?, ?)";
 
-  db.query(sql, [name, email, phone, message], (err, result) => {
+  db.query(sql, [name, email, phone, message], (err) => {
     if (err) {
       console.error("❌ Insert Error:", err);
       return res.status(500).json({ message: "Database Error" });
     }
 
-    res.status(500).json({ message: "✅ Message saved successfully!" });
+    res.status(201).json({ message: "✅ Message saved successfully!" });
   });
 });
 
-// ===== Get All Messages =====
+// Get Messages
 app.get("/messages", (req, res) => {
-  const sql = "SELECT * FROM contacts";
+  const sql = "SELECT * FROM contacts ORDER BY id DESC";
 
   db.query(sql, (err, results) => {
     if (err) {
@@ -72,10 +68,8 @@ app.get("/messages", (req, res) => {
     res.json(results);
   });
 });
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-app.use(express.static(path.join(__dirname, "public")));
+
+// ===== Start Server =====
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
