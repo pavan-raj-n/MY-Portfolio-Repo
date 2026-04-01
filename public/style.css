@@ -1,0 +1,364 @@
+/* ===============================
+   GLOBAL
+================================ */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background:#000;
+    color:#00f7ff;
+    overflow-x:hidden;
+}
+
+/* ===============================
+   MOVING STAR SKY
+================================ */
+
+#stars, #twinkling, #clouds {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:block;
+    z-index:-1;
+}
+
+#stars {
+    background: #000 url("https://www.transparenttextures.com/patterns/stardust.png") repeat top center;
+    animation: moveStars 200s linear infinite;
+}
+
+@keyframes moveStars {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+
+/* ===============================
+   GLOWING GREEN EDGES
+================================ */
+
+
+section, .header,.footer, .my-card, .port-card {
+    border:2px solid #2fff00;
+    box-shadow:0 0 30px #08ef32;
+    border-radius:15px;
+    margin:20px;
+    backdrop-filter: blur(10px);
+}
+
+/* ===============================
+   AVATAR GLOW TEXT EFFECT
+================================ */
+
+.my-heading, .logo-heading {
+    font-size:2.5rem;
+    text-shadow:
+        0 0 5px #00f7ff,
+        0 0 10px #00f7ff,
+        0 0 20px #00f7ff,
+        0 0 40px #0088ff;
+    animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+    from { text-shadow:0 0 10px #00f7ff; }
+    to { text-shadow:0 0 25px #0088ff; }
+}
+
+/* ===============================
+   CYBER BUTTONS
+================================ */
+
+.btn {
+    background: transparent;
+    border:2px solid #00ff66;
+    color:#00f7ff;
+    padding:10px 25px;
+    border-radius:30px;
+    transition:0.4s;
+}
+
+.btn:hover {
+    background:#00ff66;
+    color:#000;
+    box-shadow:0 0 20px #00ff66;
+    transform:scale(1.1);
+}
+
+/* ===============================
+   GLASS CARD EFFECT
+================================ */
+
+.my-card, .port-card {
+    background: rgba(0, 30, 50, 0.6);
+    padding:20px;
+    transition:0.5s;
+}
+
+.my-card:hover, .port-card:hover {
+    transform: translateY(-10px);
+    box-shadow:0 0 25px #00f7ff;
+}
+
+/* ===============================
+   FORM STYLE
+================================ */
+
+.form-controls {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    background:#001a1a;
+    border:1px solid #00ff66;
+    color:#00f7ff;
+    border-radius:8px;
+}
+
+.form-controls:focus {
+    outline:none;
+    box-shadow:0 0 15px #00ff66;
+}
+
+/* ===============================
+   FLOATING WAVE EFFECT
+================================ */
+
+.hero {
+    position:relative;
+    text-align:center;
+    padding:120px 20px;
+    background: linear-gradient(to bottom,#000,#001a2d);
+}
+
+.hero::after {
+    content:"";
+    position:absolute;
+    bottom:-50px;
+    left:0;
+    width:100%;
+    height:100px;
+    background: radial-gradient(circle at 50% 0%, #00f7ff33, transparent);
+    animation: waveGlow 3s infinite alternate;
+}
+
+@keyframes waveGlow {
+    from { opacity:0.4; }
+    to { opacity:1; }
+}
+
+/* ===============================
+   SOCIAL ICON GLOW
+================================ */
+
+.footer-links i {
+    color:#00f7ff;
+    transition:0.3s;
+}
+
+.footer-links i:hover {
+    color:#00ff66;
+    text-shadow:0 0 15px #00ff66;
+}
+.neon-name {
+    font-size:3rem;
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+/* Hide menu by default */
+.menu {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.95);
+    width: 220px;
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 15px #00ff66;
+    border-radius: 10px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: 0.3s ease;
+}
+
+/* Show menu when active */
+.menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Style menu list */
+.menu-list {
+    list-style: none;
+    padding: 15px;
+}
+
+.menu-list-items {
+    margin: 15px 0;
+}
+
+.links {
+    color: #00f7ff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.links:hover {
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff66;
+}
+/* Make header stay on top */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+/* Make menu appear above everything */
+
+.menu {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    z-index: 10000;
+}
+
+/* Make hamburger always clickable */
+.hamburger {
+    position: relative;
+    z-index: 3000;
+}
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;  
+    pointer-events: none; /* VERY IMPORTANT */
+}
+/* =========================
+   ROYAL MESSAGE SECTION
+========================= */
+
+.messages-section {
+    padding: 30px;
+}
+
+/* Message Card */
+#messageList div {
+    background: linear-gradient(135deg, #ff8c00, #ff6600);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 0 25px rgba(255, 140, 0, 0.7);
+    border: 2px solid #ffae00;
+    animation: royalGlow 2s infinite alternate;
+}
+
+/* Jet Black Text */
+#messageList h3,
+#messageList p,
+#messageList strong {
+    color: #000000;
+    font-weight: bold;
+    animation: textRoyal 2s infinite alternate;
+}
+
+/* Glow Animation */
+@keyframes royalGlow {
+    from {
+        box-shadow: 0 0 15px #ff8c00;
+    }
+    to {
+        box-shadow: 0 0 35px #ff4500;
+    }
+}
+
+/* Slight royal text pulse */
+@keyframes textRoyal {
+    from {
+        letter-spacing: 0px;
+    }
+    to {
+        letter-spacing: 1px;
+    }
+}
+.profile-pic{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00ff66;
+    transition: transfer 0.4s ease, box-shadow 0.4s ease;
+}
+section{
+    position: relative;
+}
+.header,
+.footer {
+    position: relative;
+    z-index: 1;
+}
+/* ===============================
+   CERTIFICATES SECTION
+================================ */
+
+.certificates-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.cert-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.cert-card {
+    background: rgba(0, 30, 50, 0.6);
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 20px #00ff66;
+    border-radius: 15px;
+    padding: 20px;
+    width: 300px;
+    transition: 0.5s;
+}
+
+.cert-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px #00f7ff;
+}
+
+.cert-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #00f7ff;
+}
+
+.cert-card h3 {
+    color: #00f7ff;
+    margin-bottom: 10px;
+}
+/* Bulge Effect */
+.profile-pic:hover {
+    transform: scale(1.10);
+    box-shadow: 
+        0 0 20px #6e9707b0,
+        0 0 40px #560489,
+        0 0 60px #43066c98;
+}

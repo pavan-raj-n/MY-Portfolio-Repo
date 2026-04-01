@@ -1,0 +1,33 @@
+{
+  "name": "pavan-raj-n",
+  "version": "1.0.0",
+  "description": "My portfolio website project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "portfolio",
+    "web",
+    "node",
+    "express",
+    "mongoose"
+  ],
+  "author": "Pavan Raj N B",
+  "license": "ISC",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavan-raj-n/MY-Portfolio-Repo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pavan-raj-n/MY-Portfolio-Repo/issues"
+  },
+  "homepage": "https://github.com/pavan-raj-n/MY-Portfolio-Repo#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mysql2": "^3.20.0"
+  }
+}
