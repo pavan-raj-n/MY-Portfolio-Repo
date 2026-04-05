@@ -73,3 +73,15 @@ app.get("/messages", (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
+db.query(`
+CREATE TABLE IF NOT EXISTS contacts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100),
+  phone VARCHAR(15),
+  message TEXT
+)
+`, (err) => {
+  if (err) console.log(err);
+  else console.log("✅ Table ready");
+});
