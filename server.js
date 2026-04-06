@@ -13,11 +13,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ===== MySQL Connection (ONLY THIS ONE) =====
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT
+
+  host: "interchange.proxy.rlwy.net",
+  user: "root",
+  password: "aAFNisTPtNwFazWMqNsYXtwwlTkXHBns",
+  database: "railway",
+  port: 26383
+
+
 });
 
 db.connect((err) => {
